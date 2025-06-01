@@ -23,7 +23,7 @@ const ContactUsSchema = new mongoose.Schema({
 		trim: true,
 		lowercase: true
 	},
-	service: {
+	description: {
 		type: String,
 		required: true,
 	},

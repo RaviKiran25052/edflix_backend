@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
-const sentMail = async (name, email, service) => {
+const sentMail = async (name, email, description) => {
 	const mailOptions = {
 		from: process.env.EMAIL_USER,
 		to: email,
@@ -28,7 +28,7 @@ const sentMail = async (name, email, service) => {
 
 			<!-- Body -->
 			<div style="padding: 30px 25px; color: #333; line-height: 1.6;">
-			<p>Thank you for contacting us about <strong>${service}</strong>.</p>
+			<p>Thank you for contacting us about <strong>${description}</strong>.</p>
 			<p>We're thrilled you're interested in creating a website with the help of our smart chatbot-powered platform. Whether you're a small business, a freelancer, or launching something new, we’ve got the tools to bring your ideas to life.</p>
 			<p>One of our friendly team members will be in touch shortly to guide you through the next steps.</p>
 			<div style="margin: 25px 0; text-align: center;">
@@ -57,18 +57,18 @@ const sentMail = async (name, email, service) => {
 };
 
 export const contactUs = async (req, res) => {
-	const { name, mobile, email, service } = req.body;
+	const { name, mobile, email, description } = req.body;
 
 	try {
-		if (!name || !mobile || !email || !service) {
+		if (!name || !mobile || !email || !description) {
 			return res.status(400).json({ message: 'All fields are required' });
 		}
-		sentMail(name, email, service);
+		sentMail(name, email, description);
 		const contact = new ContactUs({
 			name,
 			mobile,
 			email,
-			service
+			description
 		});
 
 		await contact.save();
