@@ -11,7 +11,7 @@ const ContactUsSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 		validate: {
-			validator: function(v) {
+			validator: function (v) {
 				return /\d{10}/.test(v);
 			},
 			message: props => `${props.value} is not a valid mobile number!`
@@ -20,7 +20,6 @@ const ContactUsSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true,
 		trim: true,
 		lowercase: true
 	},
