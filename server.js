@@ -4,22 +4,20 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import contactUsRoutes from './routes/ContactUsRoutes.js';
 
-// Connect to database
-connectDB();
-
+const app = express();
 dotenv.config();
 
-const app = express();
+// Connect to database
+connectDB();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Base route
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+app.get('/', (req, res) => res.send('API is running...'));
 
+// Contact Us route
 app.use('/edflix/contact', contactUsRoutes);
 
 const PORT = process.env.PORT || 5000;
